@@ -50,6 +50,7 @@ Direct CLI access for:
 - CI/CD integration
 
 ## Project Structure
+https://github.com/ruchirhuchgol-del/EAIS.git
 
 ```
 src/enhanced_enterprise_architecture_intelligence_system_e_eais/
@@ -97,6 +98,15 @@ docker-compose up --build
 - **Streamlit UI**: http://localhost:8503
 - **Next.js Portal**: http://localhost:3000
 - **Flask API**: http://localhost:8000
+
+## Demo Video
+
+The project includes a comprehensive demo video: **EAIS_DEMO.mp4**.
+
+Due to its large size (150MB), it is managed via **Git LFS**. 
+
+> [!NOTE]
+> GitHub's web interface may not preview the video directly. To view it, please **download** the file from the GitHub UI or clone the repository with [Git LFS](https://git-lfs.github.com/) installed.
 
 ### Option 3: Easy Startup Scripts
 
