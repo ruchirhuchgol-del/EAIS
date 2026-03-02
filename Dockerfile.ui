@@ -1,0 +1,8 @@
+# Use Bun image as base
+FROM oven/bun:1.1-alpine
+WORKDIR /app
+COPY src/enhanced_enterprise_architecture_intelligence_system_e_eais/ui/package.json src/enhanced_enterprise_architecture_intelligence_system_e_eais/ui/bun.lock ./
+RUN bun install
+COPY src/enhanced_enterprise_architecture_intelligence_system_e_eais/ui/ ./
+EXPOSE 3000
+CMD ["bun", "run", "dev"]

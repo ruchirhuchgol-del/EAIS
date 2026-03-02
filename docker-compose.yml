@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  eais-backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EAIS_DEBUG=${EAIS_DEBUG:-False}
+      - EAIS_LOG_LEVEL=${EAIS_LOG_LEVEL:-INFO}
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+    depends_on:
+      - eais-frontend
+    networks:
+      - eais-network
+
+  eais-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src/enhanced_enterprise_architecture_intelligence_system_e_eais/ui:/app
+    environment:
+      - NODE_ENV=development
+    networks:
+      - eais-network
+
+  eais-streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONPATH=/app
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    depends_on:
+      - eais-backend
+    networks:
+      - eais-network
+    restart: unless-stopped
+
+networks:
+  eais-network:
+    driver: bridge
+
+volumes:
+  eais-data:
+  eais-output:
+  eais-logs:

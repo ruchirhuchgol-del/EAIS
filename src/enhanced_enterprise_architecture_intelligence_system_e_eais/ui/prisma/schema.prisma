@@ -1,0 +1,212 @@
+// This is your Prisma schema file,
+// Enterprise Architecture Intelligence System (EAIS)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User Management
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  role          String    @default("viewer") // admin, architect, analyst, viewer
+  avatar        String?
+  department    String?
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  architectures      Architecture[]
+  complianceReports  ComplianceReport[]
+  businessAnalyses   BusinessAnalysis[]
+  auditLogs          AuditLog[]
+  sessions           Session[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action      String
+  resource    String
+  details     String?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+}
+
+// Architecture Models
+model Architecture {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name              String
+  description       String
+  type              String    // microservices, monolithic, serverless, event-driven, etc.
+  status            String    @default("draft") // draft, generating, completed, failed
+  
+  // Requirements
+  businessRequirements  String?
+  technicalRequirements String?
+  constraints          String?
+  
+  // Generated Content
+  overview           String?
+  components         String?   // JSON array of components
+  diagrams           String?   // JSON array of diagram URLs
+  patterns           String?   // JSON array of applied patterns
+  recommendations    String?
+  
+  // Metadata
+  complexityScore    Float?
+  estimatedCost      Float?
+  riskLevel          String?
+  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  
+  artifacts          Artifact[]
+}
+
+model Artifact {
+  id              String      @id @default(cuid())
+  architectureId  String
+  architecture    Architecture @relation(fields: [architectureId], references: [id], onDelete: Cascade)
+  name            String
+  type            String      // diagram, document, code, config
+  content         String      // Base64 or file path
+  format          String?     // json, markdown, png, svg
+  createdAt       DateTime    @default(now())
+}
+
+// Compliance Models
+model ComplianceReport {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name            String
+  framework       String    // GDPR, SOC2, HIPAA, PCI-DSS
+  
+  // Scope
+  targetSystem    String
+  scopeDetails    String?
+  
+  // Assessment Results
+  overallScore    Float?
+  status          String    @default("pending") // pending, in_progress, completed
+  findings        String?   // JSON array of findings
+  recommendations String?
+  
+  // Categories Scores
+  governanceScore     Float?
+  dataProtectionScore Float?
+  accessControlScore  Float?
+  monitoringScore     Float?
+  incidentResponseScore Float?
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+// Business Analysis Models
+model BusinessAnalysis {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  
+  // Current State
+  currentSystemCosts   Float?
+  currentStaffCount    Int?
+  currentDowntimeHours Float?
+  
+  // Proposed State
+  proposedSystemCosts  Float?
+  proposedStaffCount   Int?
+  expectedEfficiencyGain Float?
+  
+  // Calculated Metrics
+  tcoSavings           Float?
+  roiPercentage        Float?
+  paybackPeriodMonths  Float?
+  npv                  Float?
+  
+  // Analysis
+  riskAnalysis         String?
+  opportunities        String?
+  recommendations      String?
+  
+  status          String    @default("pending") // pending, analyzing, completed
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+// Knowledge Graph Models
+model KnowledgeNode {
+  id          String    @id @default(cuid())
+  type        String    // component, pattern, principle, technology, standard
+  name        String
+  label       String
+  description String?
+  properties  String?   // JSON object of additional properties
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  sourceEdges KnowledgeEdge[] @relation("SourceNodes")
+  targetEdges KnowledgeEdge[] @relation("TargetNodes")
+}
+
+model KnowledgeEdge {
+  id          String    @id @default(cuid())
+  sourceId    String
+  source      KnowledgeNode @relation("SourceNodes", fields: [sourceId], references: [id], onDelete: Cascade)
+  targetId    String
+  target      KnowledgeNode @relation("TargetNodes", fields: [targetId], references: [id], onDelete: Cascade)
+  type        String    // uses, implements, relates_to, depends_on, contains
+  weight      Float     @default(1.0)
+  properties  String?   // JSON object of additional properties
+  createdAt   DateTime  @default(now())
+}
+
+// Architecture Pattern Library
+model ArchitecturePattern {
+  id              String    @id @default(cuid())
+  name            String
+  category        String    // structural, behavioral, creational, integration
+  description     String
+  benefits        String?   // JSON array
+  drawbacks       String?   // JSON array
+  useCases        String?   // JSON array
+  implementation  String?   // JSON object with implementation details
+  tags            String?   // JSON array of tags
+  popularity      Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+// System Metrics (for dashboard)
+model SystemMetric {
+  id          String    @id @default(cuid())
+  metricName  String
+  metricValue Float
+  unit        String?
+  category    String    // performance, usage, quality
+  recordedAt  DateTime  @default(now())
+}

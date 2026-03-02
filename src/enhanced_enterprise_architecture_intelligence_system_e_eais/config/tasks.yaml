@@ -1,0 +1,104 @@
+---
+architecture_design_and_pattern_recommendation:
+  description: 'Based on the business objectives: {business_objectives}, technical
+    requirements: {technical_requirements}, and compliance needs: {compliance_requirements},
+    design a comprehensive enterprise architecture solution. Generate C4 architecture
+    models (Context, Container, Component, and Deployment views), recommend appropriate
+    architectural patterns with probability scoring, and provide detailed technical
+    specifications including technology stack recommendations, scalability considerations,
+    and integration approaches.'
+  expected_output: |-
+    A comprehensive architecture design document in markdown format containing:
+    1. Executive summary of the recommended architecture approach
+    2. C4 architecture models (Context, Container, Component, Deployment diagrams in text format)
+    3. Architectural pattern recommendations with probability scores and rationale
+    4. Technology stack recommendations with justifications
+    5. Scalability and performance considerations
+    6. Integration strategies and API design principles
+    7. Infrastructure and deployment recommendations
+    8. Security architecture overview
+  agent: enterprise_architecture_specialist
+compliance_framework_mapping_and_implementation_guidance:
+  description: 'Analyze the proposed architecture against the compliance requirements:
+    {compliance_requirements} and map all architectural components to relevant regulatory
+    frameworks. Generate detailed implementation guidance for achieving compliance,
+    identify potential compliance gaps, create audit-ready evidence documentation,
+    and provide specific security controls and data governance recommendations that
+    align with the technical architecture.'
+  expected_output: |-
+    A detailed compliance implementation guide in markdown format containing:
+    1. Compliance framework mapping for each requirement
+    2. Architecture-specific compliance implementation guidance
+    3. Data protection and privacy controls aligned with the proposed architecture
+    4. Security controls and governance frameworks
+    5. Audit evidence documentation templates
+    6. Compliance gap analysis and remediation strategies
+    7. Regulatory risk assessment and mitigation plans
+    8. Data flow compliance validation
+  agent: compliance_and_security_architect
+  context:
+  - architecture_design_and_pattern_recommendation
+business_impact_analysis_and_tco_modeling:
+  description: 'Conduct comprehensive business impact analysis for the proposed architecture
+    design, focusing on the business objectives: {business_objectives}. Create detailed
+    TCO models with 5-year projections, perform risk assessment analysis, calculate
+    sustainability and carbon footprint metrics, and provide ROI analysis. Include
+    cost optimization recommendations and business value quantification that aligns
+    with the technical architecture and compliance requirements.'
+  expected_output: |-
+    A comprehensive business impact analysis report in markdown format containing:
+    1. Total Cost of Ownership (TCO) model with 5-year financial projections
+    2. Detailed cost breakdown (infrastructure, operations, development, maintenance)
+    3. Risk assessment matrix with business impact analysis
+    4. Sustainability analysis including carbon footprint calculations
+    5. ROI projections and payback period analysis
+    6. Cost optimization recommendations
+    7. Business value quantification and metrics
+    8. Implementation timeline with cost phases
+    9. Comparative analysis with alternative approaches
+  agent: business_impact_and_tco_analyst
+  context:
+  - architecture_design_and_pattern_recommendation
+  - compliance_framework_mapping_and_implementation_guidance
+quality_assurance_and_validation_review:
+  description: Perform comprehensive quality assurance review of all deliverables
+    including architecture design, compliance guidance, and business impact analysis.
+    Validate consistency across all outputs, identify gaps or contradictions, verify
+    that all business objectives ({business_objectives}), technical requirements ({technical_requirements}),
+    and compliance requirements ({compliance_requirements}) are properly addressed.
+    Provide consolidated recommendations for optimization and improvement.
+  expected_output: |-
+    A quality assurance report in markdown format containing:
+    1. Quality assessment summary with scoring across all deliverables
+    2. Consistency validation across architecture, compliance, and business analysis
+    3. Gap analysis and missing elements identification
+    4. Recommendation consolidation and prioritization
+    5. Risk validation and mitigation review
+    6. Compliance verification checklist
+    7. Technical feasibility validation
+    8. Business alignment confirmation
+    9. Implementation readiness assessment
+  agent: architecture_quality_assurance_specialist
+  context:
+  - architecture_design_and_pattern_recommendation
+  - compliance_framework_mapping_and_implementation_guidance
+  - business_impact_analysis_and_tco_modeling
+executive_summary_and_strategic_recommendations:
+  description: 'Create a comprehensive executive summary that consolidates all analysis,
+    recommendations, and findings from the architecture design, compliance guidance,
+    business impact analysis, and quality review. Transform technical details into
+    strategic business communications suitable for C-level decision making, focusing
+    on achieving the business objectives: {business_objectives}. Include clear next
+    steps, resource requirements, and success metrics.'
+  expected_output: "An executive-ready strategic report in markdown format containing:\n1.
+    Executive Summary (2-page maximum) with key decisions and recommendations\n2.
+    Strategic roadmap with milestones and success metrics  \n3. Investment summary
+    with ROI projections and payback timeline\n4. Risk dashboard with critical risk
+    factors and mitigation strategies\n5. Compliance readiness assessment and certification
+    timeline\n6. Resource allocation recommendations (budget, team, timeline)\n7.
+    Decision matrix for C-level approval process\n8. Next steps and immediate action
+    items\n9. Success criteria and KPI framework\n10. Appendix with technical details
+    for CTO/CIO review"
+  agent: executive_communication_specialist
+  context:
+  - quality_assurance_and_validation_review

@@ -1,0 +1,68 @@
+credentials:
+  admin@eais.com:
+    email: admin@eais.com
+    name: EAIS Administrator
+    password: 4f7338a32f7e2a2d7d7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e
+    role: administrator
+    permissions:
+    - all
+    created_at: '2024-01-01T00:00:00'
+  architect@eais.com:
+    email: architect@eais.com
+    name: Enterprise Architect
+    password: 4f7338a32f7e2a2d7d7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e
+    role: architect
+    permissions:
+    - architecture
+    - compliance
+    - reports
+    - dashboard
+    created_at: '2024-01-01T00:00:00'
+  analyst@eais.com:
+    email: analyst@eais.com
+    name: Business Analyst
+    password: 4f7338a32f7e2a2d7d7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e
+    role: analyst
+    permissions:
+    - business_analysis
+    - reports
+    - dashboard
+    created_at: '2024-01-01T00:00:00'
+  viewer@eais.com:
+    email: viewer@eais.com
+    name: Viewer
+    password: 4f7338a32f7e2a2d7d7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e
+    role: viewer
+    permissions:
+    - reports
+    - dashboard
+    created_at: '2024-01-01T00:00:00'
+roles:
+  administrator:
+    name: Administrator
+    description: Full system access and user management
+    permissions:
+    - all
+  architect:
+    name: Enterprise Architect
+    description: Architecture design and compliance assessment
+    permissions:
+    - architecture
+    - compliance
+    - knowledge_graph
+    - reports
+    - dashboard
+  analyst:
+    name: Business Analyst
+    description: Business impact analysis and reporting
+    permissions:
+    - business_analysis
+    - reports
+    - knowledge_graph
+    - dashboard
+  viewer:
+    name: Viewer
+    description: Read-only access to reports and dashboards
+    permissions:
+    - reports
+    - dashboard

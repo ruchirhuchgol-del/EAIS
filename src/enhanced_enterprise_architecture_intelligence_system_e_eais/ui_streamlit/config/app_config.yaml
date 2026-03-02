@@ -1,0 +1,64 @@
+app:
+  name: EAIS - Enterprise Architecture Intelligence System
+  version: 1.0.0
+  description: AI-powered enterprise architecture intelligence platform
+  author: EAIS Development Team
+  debug: false
+server:
+  host: 0.0.0.0
+  port: 8501
+  max_upload_size: 200
+  enable_cors: true
+  enable_xsrf_protection: true
+features:
+  authentication: true
+  multi_tenancy: true
+  audit_logging: true
+  real_time_metrics: true
+  auto_refresh: true
+  export_capabilities: true
+ui:
+  theme: light
+  sidebar_width: 300
+  chart_height: 400
+  enable_wide_mode: true
+  show_metrics: true
+  auto_refresh_interval: 30
+ai:
+  default_provider: openai
+  model: gpt-4o-mini
+  temperature: 0.7
+  max_tokens: 4000
+  timeout: 120
+  retry_attempts: 3
+security:
+  session_timeout: 3600
+  password_policy: standard
+  require_mfa: false
+  enable_audit_log: true
+  rate_limiting: true
+  max_requests_per_minute: 60
+database:
+  type: json
+  path: data/
+  backup_enabled: true
+  backup_interval: 24
+integrations:
+  slack:
+    enabled: false
+    webhook_url: null
+  teams:
+    enabled: false
+    webhook_url: null
+  email:
+    enabled: false
+    smtp_server: null
+    smtp_port: 587
+    username: null
+    password: null
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: logs/eais.log
+  max_size: 10
+  backup_count: 5
