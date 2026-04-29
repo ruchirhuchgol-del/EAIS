@@ -1,8 +1,6 @@
 # 🚀 Industry-Grade README for EAIS
 
-Here's a completely transformed, GitHub-optimized README designed to maximize visibility, credibility, and star attraction:
 
-```markdown
 <div align="center">
 
 # 🏛️ EAIS — Enterprise Architecture Intelligence System
