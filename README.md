@@ -1,5 +1,3 @@
-# 🚀 Industry-Grade README for EAIS
-
 
 <div align="center">
 
